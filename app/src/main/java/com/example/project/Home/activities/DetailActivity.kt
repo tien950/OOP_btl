@@ -1,7 +1,9 @@
 package com.example.project.Home.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +28,15 @@ class DetailActivity : AppCompatActivity() {
             // Handle back button
             findViewById<ImageView>(R.id.iv_back)?.setOnClickListener {
                 finish()
+            }
+
+            // Handle booking button
+            findViewById<Button>(R.id.btnBook)?.setOnClickListener {
+                val intent = Intent(this, BookingActivity::class.java).apply {
+                    putExtra("COURT_NAME", courtName)
+                    putExtra("COURT_ADDRESS", courtAddress)
+                }
+                startActivity(intent)
             }
 
         } catch (e: Exception) {
