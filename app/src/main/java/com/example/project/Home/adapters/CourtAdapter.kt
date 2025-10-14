@@ -1,7 +1,6 @@
 package com.example.project.Home.adapters
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,58 +18,33 @@ class CourtAdapter(private val courtList: List<Court>) :
             binding.address.text = court.getDisplayAddress()
 
             // Set click listener on the MaterialCardView root
-            binding.root.setOnClickListener {
-                Log.d("CourtAdapter", "=== CARD CLICK DETECTED ===")
-                Log.d("CourtAdapter", "Card clicked for: ${court.getDisplayName()}")
-                Log.d("CourtAdapter", "Context: ${binding.root.context}")
-                Log.d("CourtAdapter", "Context class: ${binding.root.context.javaClass.simpleName}")
-
-                try {
-                    val intent = Intent(binding.root.context, DetailActivity::class.java).apply {
-                        putExtra("court_name", court.getDisplayName())
-                        putExtra("court_address", court.getDisplayAddress())
-                        // Add flags to ensure the activity starts properly
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    }
-
-                    Log.d("CourtAdapter", "Intent created with extras:")
-                    Log.d("CourtAdapter", "  - court_name: ${intent.getStringExtra("court_name")}")
-                    Log.d("CourtAdapter", "  - court_address: ${intent.getStringExtra("court_address")}")
-                    Log.d("CourtAdapter", "About to start DetailActivity...")
-
-                    binding.root.context.startActivity(intent)
-                    Log.d("CourtAdapter", "startActivity() called successfully")
-
-                } catch (e: Exception) {
-                    Log.e("CourtAdapter", "=== ERROR STARTING ACTIVITY ===", e)
-                    Log.e("CourtAdapter", "Error message: ${e.message}")
-                    Log.e("CourtAdapter", "Error cause: ${e.cause}")
+            binding.root.setOnClickListener { view ->
+                val intent = Intent(view.context, DetailActivity::class.java).apply {
+                    putExtra("court_name", court.getDisplayName())
+                    putExtra("court_address", court.getDisplayAddress())
                 }
+                view.context.startActivity(intent)
             }
 
             // Make sure the card is clickable
             binding.root.isClickable = true
             binding.root.isFocusable = true
 
-            // Prevent click propagation for specific buttons
+            // Handle specific buttons
             binding.btnHeart.setOnClickListener {
-                Log.d("CourtAdapter", "Heart button clicked")
-                // Handle heart button click separately
+                // Handle heart button click
             }
 
             binding.btnDirections.setOnClickListener {
-                Log.d("CourtAdapter", "Directions button clicked")
-                // Handle map/directions button click separately
+                // Handle map/directions button click
             }
 
             binding.btnBook.setOnClickListener {
-                Log.d("CourtAdapter", "Book button clicked")
-                // Handle booking button click separately
+                // Handle booking button click
             }
 
             binding.phone.setOnClickListener {
-                Log.d("CourtAdapter", "Phone clicked")
-                // Handle phone call functionality here
+                // Handle phone call functionality
             }
         }
     }
