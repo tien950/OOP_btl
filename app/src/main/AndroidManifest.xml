@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project">
         <activity
+            android:name=".FilterActivity"
+            android:exported="false" />
+        <activity
             android:name=".Home.activities.DetailActivity"
             android:exported="false" />
         <activity
